@@ -14,6 +14,6 @@ object ImageApp extends App{
   ImageDataModel.image.populate(allImagesTrain)
   ImageDataModel.image.populate(allImagesTest,false)
 
-  ImageClassifier.learn(10)
+  ImageClassifier.learn(10000)
   ImageClassifier.test()
 }

@@ -24,7 +24,7 @@ object ImageDataModel extends DataModel{
 
   //Extracts the various hierarchical relations labels of an image segment given in ontology_path.txt
   val ontologyList = Source.fromFile("data/NathanData/ontology_path.txt").getLines.toList.filterNot(_.isEmpty).map { line =>
-    line.split("[\t. /]")
+    line.split("[\t. />]")
   }.toArray
 
   //Extracts the labels that corresponds to each image
@@ -38,12 +38,27 @@ object ImageDataModel extends DataModel{
       //Splits the imageName into different components, with item at (2) being the image file number
       val tokens= x.split("[/.]")
       val test = tokens(2)
-      //Finds the which labelID corresponds to the given image
+      //Finds which labelID corresponds to the given image
       val labelID = (labelsList.filter(x => x(0).equals(tokens(2))))(0)(2)
 
       //Matches the labelID with the corresponding label
       val label = labelIDList.filter(x => x(0).equals(labelID))
       label(0)(1)
+    }
+  }
+
+  val ImageOntology =property(image){
+    x: String => {
+
+      //Splits the imageName into different components, with item at (2) being the image file number
+      val tokens= x.split("[/.]")
+      val test = tokens(2)
+
+      //Finds the most general label for the image from its ontology text
+      val genLabel = ontologyList.filter(x => x(0).equals(tokens(2)))(0)
+
+      //Returns the double value of the respective feature
+      genLabel(3)
     }
   }
 
