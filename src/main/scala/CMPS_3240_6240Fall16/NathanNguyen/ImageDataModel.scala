@@ -386,4 +386,30 @@ object ImageDataModel extends DataModel{
       features(26).toDouble
     }
   }
+
+  val ImageFeature26= property(image){
+    x: String => {
+      //Splits the imageName into different components, with item at (2) being the image file number
+      val tokens= x.split("[/.]")
+
+      //Finds the feature that corresponds to the given image
+      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+
+      //Returns the double value of the respective feature
+      features(27).toDouble
+    }
+  }
+
+  val ImageFeature27= property(image){
+    x: String => {
+      //Splits the imageName into different components, with item at (2) being the image file number
+      val tokens= x.split("[/.]")
+
+      //Finds the feature that corresponds to the given image
+      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+
+      //Returns the double value of the respective feature
+      features(28).toDouble
+    }
+  }
 }
