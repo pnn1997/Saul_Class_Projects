@@ -15,7 +15,7 @@ object ImageClassifiers {
   import edu.illinois.cs.cogcomp.saul.classifier.Learnable
   object ImageClassifier extends Learnable[String](image) {
     def label = ImageOntology
-    override lazy val classifier = new SaulWekaWrapper(new IBk(3))
+    override lazy val classifier = new SaulWekaWrapper(new NaiveBayes)
     override def feature = using(ImageFeature1, ImageFeature2 , ImageFeature3, ImageFeature4,
       ImageFeature5, ImageFeature6, ImageFeature7, ImageFeature8, ImageFeature9, ImageFeature10,
       ImageFeature11, ImageFeature12, ImageFeature13, ImageFeature14, ImageFeature15, ImageFeature16,
