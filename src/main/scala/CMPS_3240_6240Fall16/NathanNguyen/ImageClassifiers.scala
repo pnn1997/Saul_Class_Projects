@@ -7,6 +7,7 @@ package CMPS_3240_6240Fall16.NathanNguyen
 import edu.illinois.cs.cogcomp.lbjava.learn._
 import weka.classifiers.`lazy`.IBk
 import edu.illinois.cs.cogcomp.saul.classifier.Learnable
+import edu.illinois.cs.cogcomp.saul.learn.SaulWekaWrapper
 import weka.classifiers.bayes.NaiveBayes
 
 object ImageClassifiers {
@@ -14,12 +15,19 @@ object ImageClassifiers {
   import edu.illinois.cs.cogcomp.saul.classifier.Learnable
   object ImageClassifier extends Learnable[String](image) {
     def label = ImageOntology
-    override lazy val classifier = new SaulWekaWrapper(new NaiveBayes())
-    override def feature = using(ImageFeature1)
+    override lazy val classifier = new SaulWekaWrapper(new IBk(3))
+    override def feature = using(ImageFeature1, ImageFeature2 , ImageFeature3, ImageFeature4,
+      ImageFeature5, ImageFeature6, ImageFeature7, ImageFeature8, ImageFeature9, ImageFeature10,
+      ImageFeature11, ImageFeature12, ImageFeature13, ImageFeature14, ImageFeature15, ImageFeature16,
+      ImageFeature17, ImageFeature18, ImageFeature19, ImageFeature20, ImageFeature21, ImageFeature22,
+      ImageFeature23, ImageFeature24, ImageFeature25, ImageFeature26, ImageFeature27)
   }
 }
 
+//The following comments are just notes on syntax for usinmg different learners
+
 //WekaWrapper(new IBk(1))
+//new SaulWekaWrapper(new NaiveBayes)
 
 /* , ImageFeature2 , ImageFeature3, ImageFeature4,
 ImageFeature5, ImageFeature6, ImageFeature7, ImageFeature8, ImageFeature9, ImageFeature10,

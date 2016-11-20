@@ -8,12 +8,12 @@ import Readers.NathanNguyen.NathanImageReader
 import scala.collection.JavaConversions._
 object ImageApp extends App{
 
-  val allImagesTrain= new NathanImageReader("data/NathanData/train.txt").images
-  val allImagesTest= new NathanImageReader("data/NathanData/gold.txt").images
+  val allImagesTrain= new NathanImageReader("data/NathanData/train_modified.txt").images
+  val allImagesTest= new NathanImageReader("data/NathanData/test_modified.txt").images
 
   ImageDataModel.image.populate(allImagesTrain)
   ImageDataModel.image.populate(allImagesTest,false)
 
-  ImageClassifier.learn(10)
+  ImageClassifier.learn(5)
   ImageClassifier.test()
 }

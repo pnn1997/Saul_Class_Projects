@@ -9,6 +9,10 @@ import scala.io.Source
 
 object ImageDataModel extends DataModel{
   val image= node[String]
+  
+  //Indices of the file name corresponding to the image and section numbers
+  val imageNumPos = 0;
+  val imageSecPos = 1;
 
   //Gets all possible labels from wlist.txt file and stores it in labelsList
   val labelIDList = Source.fromFile("data/NathanData/wlist.txt").getLines.toList.filterNot(_.isEmpty).map { line =>
@@ -36,10 +40,10 @@ object ImageDataModel extends DataModel{
     x: String => {
 
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
-      val test = tokens(2)
+      val tokens= x.split("[\t/.]")
+
       //Finds which labelID corresponds to the given image
-      val labelID = (labelsList.filter(x => x(0).equals(tokens(2))))(0)(2)
+      val labelID = (labelsList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos))))(0)(2)
 
       //Matches the labelID with the corresponding label
       val label = labelIDList.filter(x => x(0).equals(labelID))
@@ -51,13 +55,12 @@ object ImageDataModel extends DataModel{
     x: String => {
 
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
-      val test = tokens(2)
+      val tokens= x.split("[\t/.]")
 
       //Finds the most general label for the image from its ontology text
-      val genLabel = ontologyList.filter(x => x(0).equals(tokens(2)))(0)
+      val genLabel = ontologyList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
-      //Returns the double value of the respective feature
+      //Returns the most general label for the image (excluding Entity)
       genLabel(3)
     }
   }
@@ -65,10 +68,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature1= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(2).toDouble
@@ -78,10 +81,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature2= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(3).toDouble
@@ -91,10 +94,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature3= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(4).toDouble
@@ -104,10 +107,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature4= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(5).toDouble
@@ -117,10 +120,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature5= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(6).toDouble
@@ -130,10 +133,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature6= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(7).toDouble
@@ -143,10 +146,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature7= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(8).toDouble
@@ -156,10 +159,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature8= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(9).toDouble
@@ -169,10 +172,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature9= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(10).toDouble
@@ -182,10 +185,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature10= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(11).toDouble
@@ -195,10 +198,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature11= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(12).toDouble
@@ -208,10 +211,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature12= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(13).toDouble
@@ -221,10 +224,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature13= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(14).toDouble
@@ -234,10 +237,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature14= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(15).toDouble
@@ -247,10 +250,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature15= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(16).toDouble
@@ -260,10 +263,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature16= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(17).toDouble
@@ -273,10 +276,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature17= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(18).toDouble
@@ -286,10 +289,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature18= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(19).toDouble
@@ -299,10 +302,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature19= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(20).toDouble
@@ -312,10 +315,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature20= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(21).toDouble
@@ -325,10 +328,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature21= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(22).toDouble
@@ -338,10 +341,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature22= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(23).toDouble
@@ -351,10 +354,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature23= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(24).toDouble
@@ -364,10 +367,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature24= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(25).toDouble
@@ -377,10 +380,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature25= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(26).toDouble
@@ -390,10 +393,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature26= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(27).toDouble
@@ -403,10 +406,10 @@ object ImageDataModel extends DataModel{
   val ImageFeature27= property(image){
     x: String => {
       //Splits the imageName into different components, with item at (2) being the image file number
-      val tokens= x.split("[/.]")
+      val tokens= x.split("[\t/.]")
 
       //Finds the feature that corresponds to the given image
-      val features = featuresList.filter(x => x(0).equals(tokens(2)))(0)
+      val features = featuresList.filter(x => x(0).equals(tokens(imageNumPos)) && x(1).equals(tokens(imageSecPos)))(0)
 
       //Returns the double value of the respective feature
       features(28).toDouble

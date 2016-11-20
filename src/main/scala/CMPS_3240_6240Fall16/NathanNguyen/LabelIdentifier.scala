@@ -3,6 +3,7 @@ package CMPS_3240_6240Fall16.NathanNguyen
 import scala.io.Source
 /**
   * Created by Nathan on 10/26/2016.
+  * Serves as a test class
   */
 
 object LabelIdentifier {
