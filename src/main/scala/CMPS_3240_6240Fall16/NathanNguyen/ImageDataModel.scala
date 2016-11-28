@@ -21,21 +21,25 @@ object ImageDataModel extends DataModel{
 
 
   //Extracts the different features for each segment of the images given by features.txt
+  //NOTE: I processed the features.txt so that only a single space separates each entry within each line
   val featuresList = Source.fromFile("data/NathanData/features.txt").getLines.toList.filterNot(_.isEmpty).map { line =>
     line.split("[\t /]")
   }.toArray
 
 
   //Extracts the various hierarchical relations labels of an image segment given in ontology_path.txt
+  //NOTE: I processed the ontology_path.txt so that only a single space separates each entry within each line
+  //NOTE2: I also removed the entry that did not have a label besides "entity"
   val ontologyList = Source.fromFile("data/NathanData/ontology_path.txt").getLines.toList.filterNot(_.isEmpty).map { line =>
     line.split("[\t. />]")
   }.toArray
 
-  //Extracts the labels that corresponds to each image
+  //Extracts the labels that corresponds to each image from labels.txt
   val labelsList = Source.fromFile("data/NathanData/labels.txt").getLines.toList.filterNot(_.isEmpty).map { line =>
     line.split("[\t /]")
   }.toArray
 
+  //Gives a label to the image based on the label given in labels.txt
   val ImageLabel =property(image){
     x: String => {
 
@@ -51,6 +55,7 @@ object ImageDataModel extends DataModel{
     }
   }
 
+  //Gives a more general label to each image based on the most general category found in ontology_path.txt
   val ImageOntology =property(image){
     x: String => {
 
@@ -64,6 +69,10 @@ object ImageDataModel extends DataModel{
       genLabel(3)
     }
   }
+
+  /*
+   * The following features were derived from the data in features.txt provided with the data
+   */
 
   val ImageFeature1= property(image){
     x: String => {
